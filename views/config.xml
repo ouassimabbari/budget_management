@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="budget_management.config_tree" model="ir.ui.view">
+            <field name="name">budget_management.config.tree</field>
+            <field name="model">budget_management.config</field>
+            <field name="arch" type="xml">
+                <tree string="Configurations des budgets client">
+                    <field name="euroToMad"/>
+                    <field name="Frais"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="budget_management.config_form" model="ir.ui.view">
+            <field name="name">budget_management.config.form</field>
+            <field name="model">budget_management.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuration du budget client">
+                    <sheet>
+                        <group>
+                            <field name="euroToMad"/>
+                            <field name="Frais"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_config">
+            <field name="name">Configurations des budgets clients</field>
+            <field name="res_model">budget_management.config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première configuration
+                </p>
+            </field>
+        </record>
+
+
+    <menuitem name="Configurations des budgets clients" id="budget_management.config_budgets_client" parent="budget_management.menu_root" action="budget_management.action_window_config"/>
+    </data>
+</odoo>

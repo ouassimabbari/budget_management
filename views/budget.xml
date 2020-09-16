@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <record id="budget_management.budget_tree" model="ir.ui.view">
+            <field name="name">budget_management.budget.tree</field>
+            <field name="model">budget_management.budget</field>
+            <field name="arch" type="xml">
+                <tree string="Budgets">
+                    <field name="budget_name" />
+                    <field name="initialAmount"/>
+                    <field name="amountLeft"/>
+                    <field name="amountConsumed"/>
+                    <field name="configuration"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="budget_management.budget_form" model="ir.ui.view">
+            <field name="name">budget_management.budget.form</field>
+            <field name="model">budget_management.budget</field>
+            <field name="arch" type="xml">
+                <form string="Budget">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="budget_name" />
+                                <field name="initialAmount"/>
+                                <field name="amountLeft"/>
+                            </group>
+                            <group>
+                                <field name="amountConsumed"/>
+                                <field name="configuration"/>
+                            </group>
+                            <group>
+                                <field name="sub_budgets"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_budgets">
+            <field name="name">Budgets</field>
+            <field name="res_model">budget_management.budget</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre premier budget
+                </p>
+            </field>
+        </record>
+
+
+    <menuitem name="Budgets" id="budget_management.budgets" parent="budget_management.menu_root" action="budget_management.action_window_budgets"/>
+    </data>
+</odoo>

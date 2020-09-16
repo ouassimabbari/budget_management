@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <record id="budget_management.campagne_tree" model="ir.ui.view">
+            <field name="name">budget_management.campagne.tree</field>
+            <field name="model">budget_management.campagne</field>
+            <field name="arch" type="xml">
+                <tree string="Campagnes">
+                    <field name="name_seq"/>
+                    <field name="campagne_name"/>
+                    <field name="startDate"/>
+                    <field name="endDate"/>
+                    <field name="client"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="budget_management.campagne_form" model="ir.ui.view">
+            <field name="name">budget_management.campagne.form</field>
+            <field name="model">budget_management.campagne</field>
+            <field name="arch" type="xml">
+                <form string="Campagne">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name_seq" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="campagne_name"/>
+                                <field name="client"/>
+                            </group>
+                            <group>
+                                <field name="startDate"/>
+                            </group>
+                            <group>
+                                <field name="endDate"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_campagnes">
+            <field name="name">Campagnes</field>
+            <field name="res_model">budget_management.campagne</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première campagne
+                </p>
+            </field>
+        </record>
+
+    <menuitem name="budget management" id="budget_management.menu_root" sequence="-1"/>
+
+
+    <menuitem name="Campagnes" id="budget_management.campagnes" parent="budget_management.menu_root" action="budget_management.action_window_campagnes"/>
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <record id="budget_management.sub_configuration_tree" model="ir.ui.view">
+            <field name="name">budget_management.sub_configuration.tree</field>
+            <field name="model">budget_management.sub_configuration</field>
+            <field name="arch" type="xml">
+                <tree string="sub_configuration">
+                    <field name="configuration_name" />
+                </tree>
+            </field>
+        </record>
+
+        <template id="assets_backend" name="xxxxxxxxxxxx" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript"
+                        src="/budget_management/static/src/rangeslider.min.js"/>
+                <script type="text/javascript"
+                        src="/budget_management/static/src/percentage.js"/>
+            </xpath>
+        </template>
+
+        <record id="budget_management.sub_configuration_form" model="ir.ui.view">
+            <field name="name">budget_management.sub_configuration.form</field>
+            <field name="model">budget_management.sub_configuration</field>
+            <field name="arch" type="xml">
+                <form string="sous configuration">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="configuration_name" />
+                            </group>
+                            <group>
+                                <field name="configuration_percentage_sub_budget"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_sub_configurations">
+            <field name="name">sous configurations</field>
+            <field name="res_model">budget_management.sub_configuration</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première sous configuration
+                </p>
+            </field>
+        </record>
+
+
+    <menuitem name="sous configurations" id="budget_management.sub_configurations" parent="budget_management.menu_root" action="budget_management.action_window_sub_configurations"/>
+    </data>
+</odoo>
