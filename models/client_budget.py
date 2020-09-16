@@ -1,5 +1,8 @@
 from odoo import models, fields, _, api
 import datetime
+import json
+import logging
+_logger = logging.getLogger(__name__)
 
 class client_budget(models.Model):
 
@@ -19,6 +22,12 @@ class client_budget(models.Model):
 
     @api.model
     def create(self, vals):
+        _logger.debug("this is the vals ----------------------- %s",vals)
+        config_id = vals['config']
+        _logger.debug("this is the config_id ----------------------- %s",config_id)
+        config_record = self.env['budget_management.config'].browse(vals['config'])
+        _logger.debug("this is the config ----------------------- %s",config_record)
+        _logger.debug("this is the frais ----------------------- %s",config_record.Frais)
         vals["created_at"] = datetime.datetime.now()
         result = super(client_budget, self).create(vals)
         return result
