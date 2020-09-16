@@ -22,9 +22,24 @@
             <field name="arch" type="xml">
                 <form string="Budget client">
                     <sheet>
+                        <field name="id" invisible="1"/>
                         <group>
                             <field name="initialAmountInMad"/>
+                            <field name="initialAmountInEuros"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="amountLeftInEuros" attrs="{'readonly': [('id', '=', False)]}"/>
+                                <field name="amountLeftInMad"/>
+                            </group>
+                            <group>
+                                <field name="amountConsumedInEuros"/>
+                                <field name="amountConsumedInMad"/>
+                            </group>
+                        </group>
+                        <group>
                             <field name="config"/>
+                            <field name="created_at"/>
                         </group>
                     </sheet>
                     <div class="oe_chatter">

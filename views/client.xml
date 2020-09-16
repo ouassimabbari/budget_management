@@ -26,17 +26,13 @@
                   icon="fa-suitcase">
                   <field string="Campagnes" name="campagne_count" widget="statinfo"/>
               </button>
-              <button class="oe_stat_button" type="object" name="get_budget"
-                  icon="fa-money">
-                  <field string="budget" name="budget_count" widget="statinfo"/>
-              </button>
             </div>
+            <field name="vat" position="after">
+              <field name="budget"/>
+            </field>
             <notebook position="inside">
               <page string="Campagnes" name="campagne">
                 <field name="campagnes"/>
-              </page>
-              <page string="Budget" name="budget">
-                <field name="budget"/>
               </page>
             </notebook>
           </field>
