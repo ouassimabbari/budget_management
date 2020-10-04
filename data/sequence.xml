@@ -2,11 +2,27 @@
 <odoo>
     <data noupdate="1">
 
-        <!-- Sequences for sale.order -->
+        <!-- Sequences for budget_management.campagne -->
         <record id="seq_campagne_record" model="ir.sequence">
             <field name="name">sequence de campagne</field>
             <field name="code">budget_management.campagne.sequence</field>
-            <field name="prefix">HP</field>
+            <field name="prefix">CMP</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_budget_campagne_record" model="ir.sequence">
+            <field name="name">sequence de budget campagne</field>
+            <field name="code">budget_management.budget_campagne.sequence</field>
+            <field name="prefix">BDG</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_budget_avance_record" model="ir.sequence">
+            <field name="name">sequence d'avance de campagne</field>
+            <field name="code">budget_management.avance.sequence</field>
+            <field name="prefix">AVC</field>
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>

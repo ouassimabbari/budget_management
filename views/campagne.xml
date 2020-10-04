@@ -5,11 +5,17 @@
             <field name="model">budget_management.campagne</field>
             <field name="arch" type="xml">
                 <tree string="Campagnes">
-                    <field name="name_seq"/>
+                    <field name="name"/>
                     <field name="campagne_name"/>
                     <field name="startDate"/>
                     <field name="endDate"/>
                     <field name="client"/>
+                    <field name="initialAmountInMad"/>
+                    <field name="initialAmountInEuros"/>
+                    <field name="amountConsumedInEuros"/>
+                    <field name="amountConsumedInMad"/>
+                    <field name="amountLeftInEuros"/>
+                    <field name="amountLeftInMad"/>
                 </tree>
             </field>
         </record>
@@ -19,10 +25,29 @@
             <field name="model">budget_management.campagne</field>
             <field name="arch" type="xml">
                 <form string="Campagne">
+                    <header>
+                        <button name="action_validate" type="object" string="Valider" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'brouillon')]}"/>
+                        <button name="action_activate" type="object" string="Activer" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'validé'), ('state', '!=', 'intérrompu'), ('state', '!=', 'arrété')]}"/>
+                        <button name="action_interrupt" type="object" string="Interrompre" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'actif')]}"/>
+                        <button name="action_end" type="object" string="Terminer" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'actif')]}"/>
+                        <button name="action_stop" type="object" string="Arrêter" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'actif')]}"/>
+                        <button name="action_cancel" type="object" string="Annuler" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'brouillon')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="brouillon,validé,actif,intérrompu,arrété,terminé,annulé"/>
+                    </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="get_budgets"
+                                icon="fa-money">
+                                <field string="budget" name="budget_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="get_avances"
+                                icon="fa-money">
+                                <field string="avance" name="avance_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <h1>
-                                <field name="name_seq" readonly="1"/>
+                                <field name="name" readonly="1"/>
                             </h1>
                         </div>
                         <group>
@@ -32,16 +57,131 @@
                             </group>
                             <group>
                                 <field name="startDate"/>
-                            </group>
-                            <group>
                                 <field name="endDate"/>
                             </group>
                         </group>
+                        <group>
+                            <group>
+                                <field name="initialAmountInMad"/>
+                                <field name="initialAmountInEuros"/>
+                            </group>
+                            <group>
+                                <field name="euroToMad"/>
+                                <field name="Frais"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="amountConsumedInEuros"/>
+                                <field name="amountConsumedInMad"/>
+                            </group>
+                            <group>
+                                <field name="amountLeftInEuros"/>
+                                <field name="amountLeftInMad"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="availableBudgetInMad"/>
+                                <field name="availableBudgetInEuros"/>
+                            </group>
+                            <group>
+                                <field name="avances">
+                                    <form string="Configuration des avances de campagne">
+                                        <sheet>
+                                            <div class="oe_title">
+                                                <h1>
+                                                    <field name="name" readonly="1"/>
+                                                </h1>
+                                            </div>
+                                            <group>
+                                                <group>
+                                                    <field name="addedAt"/>
+                                                </group>
+                                            </group>
+                                            <group>
+                                                <group>
+                                                    <field name="amountInMad"/>
+                                                </group>
+                                                <group>
+                                                    <field name="amountInEuros"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="initialAmountInMadMinusCharges"/>
+                                <field name="initialAmountInEurosMinusCharges"/>
+                            </group>
+                        </group>
                     </sheet>
+                    <notebook>
+                        <page string="Budgets" name="Budgets">
+                            <field name="budgets">
+                                <form string="Budget">
+                                    <sheet>
+                                        <div class="oe_title">
+                                            <h1>
+                                                <field name="name" readonly="1"/>
+                                            </h1>
+                                        </div>
+                                        <group>
+                                            <label for="isPercentage" class="oe_edit_only"/>
+                                            <field name="isPercentage" options="{'horizontal': true}" nolabel="1" class="oe_edit_only" widget="radio"  groups="base.group_no_one"/>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="value" />
+                                            </group>
+                                            <group>
+                                                <field name="startDate" />
+                                                <field name="endDate"/>
+                                            </group>
+                                        </group>
+                                        <div attrs="{'invisible': [('isPercentage', '=', 'pourcentage')]}">
+                                            <group>
+                                                <group>
+                                                    <field name="initialAmountInMad"/>
+                                                    <field name="initialAmountInEuros"/>
+                                                </group>
+                                            </group>
+                                            <group>
+                                                <group>
+                                                    <field name="amountConsumedInEuros"/>
+                                                    <field name="amountConsumedInMad"/>
+                                                </group>
+                                                <group>
+                                                    <field name="amountLeftInEuros"/>
+                                                    <field name="amountLeftInMad"/>
+                                                </group>
+                                            </group>
+                                        </div>
+                                        <div attrs="{'invisible': [('isPercentage', '=', 'valeurs')]}">
+                                            <group>
+                                                <field name="pourcentage"/>
+                                            </group>
+                                            <group>
+                                                <group>
+                                                    <field name="amountConsumedInEuros"/>
+                                                    <field name="amountConsumedInMad"/>
+                                                </group>
+                                                <group>
+                                                    <field name="amountLeftInEuros"/>
+                                                    <field name="amountLeftInMad"/>
+                                                </group>
+                                            </group>
+                                        </div>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
                     <div class="oe_chatter">
-                            <field name="message_follower_ids" widget="mail_followers"/>
-                            <field name="activity_ids" widget="mail_activity"/>
-                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
                     </div>
                 </form>
             </field>
@@ -58,9 +198,9 @@
             </field>
         </record>
 
-    <menuitem name="budget management" id="budget_management.menu_root" sequence="-1"/>
+    
 
 
-    <menuitem name="Campagnes" id="budget_management.campagnes" parent="budget_management.menu_root" action="budget_management.action_window_campagnes"/>
+    <menuitem name="Campagnes" id="budget_management.campagnes" parent="budget_management.menu_root" action="budget_management.action_window_campagnes" sequence="1"/>
     </data>
 </odoo>

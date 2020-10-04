@@ -25,13 +25,10 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/client.xml',
-        'views/campagne.xml',
         'views/budget.xml',
-        'views/client_budget.xml',
-        'views/configuration.xml',
-        'views/config.xml',
-        'views/sub_configuration.xml',
-        'views/sub_budget.xml',
+        'views/config_selection.xml',
+        'views/campagne.xml',
+        'views/config_avance.xml',
         'data/sequence.xml',
     ],
     # only loaded in demonstration mode

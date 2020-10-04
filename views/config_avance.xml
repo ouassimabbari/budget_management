@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+        <record id="budget_management.avance_tree" model="ir.ui.view">
+            <field name="name">budget_management.avance.tree</field>
+            <field name="model">budget_management.avance</field>
+            <field name="arch" type="xml">
+                <tree string="Configurations des avances de campagnes">
+                    <field name="name"/>
+                    <field name="amountInEuros"/>
+                    <field name="amountInMad"/>
+                    <field name="addedAt"/>
+                    <field name="campagne"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="budget_management.avance_form" model="ir.ui.view">
+            <field name="name">budget_management.avance.form</field>
+            <field name="model">budget_management.avance</field>
+            <field name="arch" type="xml">
+                <form string="Configuration des avances de campagne">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="campagne"/>
+                            </group>
+                            <group>
+                                <field name="addedAt"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="amountInMad"/>
+                            </group>
+                            <group>
+                                <field name="amountInEuros"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_avance">
+            <field name="name">Configurations des avances de campagnes</field>
+            <field name="res_model">budget_management.avance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première configuration d'avance de campagne
+                </p>
+            </field>
+        </record>
+
+    
+
+
+    <menuitem name="Configuration des avances" id="budget_management.avances" parent="budget_management.menu_root" action="budget_management.action_window_avance" sequence="3"/>
+    </data>
+</odoo>

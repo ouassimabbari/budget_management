@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <record id="budget_management.selection_tree" model="ir.ui.view">
+            <field name="name">budget_management.selection.tree</field>
+            <field name="model">budget_management.selection</field>
+            <field name="arch" type="xml">
+                <tree string="Configurations des Budgets">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="budget_management.selection_form" model="ir.ui.view">
+            <field name="name">budget_management.selection.form</field>
+            <field name="model">budget_management.selection</field>
+            <field name="arch" type="xml">
+                <form string="Configuration de budget">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="budget_management.action_window_selection">
+            <field name="name">Configurations des budgets</field>
+            <field name="res_model">budget_management.selection</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première configuration de budget
+                </p>
+            </field>
+        </record>
+
+    
+
+
+    <menuitem name="Configuration de budgets" id="budget_management.selections" parent="budget_management.menu_root" action="budget_management.action_window_selection" sequence="4"/>
+    </data>
+</odoo>
