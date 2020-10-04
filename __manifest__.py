@@ -26,9 +26,14 @@
         # 'security/ir.model.access.csv',
         'views/client.xml',
         'views/budget.xml',
+<<<<<<< HEAD
         'views/config_selection.xml',
         'views/campagne.xml',
         'views/config_avance.xml',
+=======
+        'views/config.xml',
+        'views/sub_budget.xml',
+>>>>>>> 22a8b6fff1050f5ff11791934ffeb468293f6436
         'data/sequence.xml',
     ],
     # only loaded in demonstration mode

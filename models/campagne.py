@@ -1,8 +1,12 @@
 from odoo import models, fields, _, api
+<<<<<<< HEAD
 import datetime
 from odoo.exceptions import ValidationError
 from odoo.exceptions import Warning
 import json
+=======
+from odoo.exceptions import ValidationError
+>>>>>>> 22a8b6fff1050f5ff11791934ffeb468293f6436
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -24,6 +28,7 @@ class campagne(models.Model):
     endDate = fields.Date(string="Date de fin", required=True)
     client = fields.Many2one('res.partner','Propriétaire de campagne', required=True)
     initialAmountInMad = fields.Float(string='budget initial en Dh', required=True)
+<<<<<<< HEAD
     initialAmountInMadMinusCharges = fields.Float(string='budget initial en Dh sans frais', readonly=True, compute='_compute_initialAmountInMadMinusCharges')
     initialAmountInEuros = fields.Float(string='budget initial en Euros', readonly=True, compute='_compute_initialAmountInEuros')
     initialAmountInEurosMinusCharges = fields.Float(string='budget initial en Euros sans frais', readonly=True, compute='_compute_initialAmountInEurosMinusCharges')
@@ -40,6 +45,16 @@ class campagne(models.Model):
     name = fields.Char(string='Référence de campagne', required=True, copy=False, readonly=True, index=True, default=lambda self: _('New'))
     availableBudgetInMad = fields.Float(string="budget disponible en Dh", readonly=True, compute='_compute_availableBudgetInMad')
     availableBudgetInEuros = fields.Float(string="budget disponible en Euros", readonly=True, compute='_compute_availableBudgetInEuros')
+=======
+    initialAmountInEuros = fields.Float(string='budget initial en Euros', readonly=True)
+    amountLeftInMad = fields.Float(string='budget restant en Dh', readonly=True)
+    amountLeftInEuros = fields.Float(string='budget restant en Euros', readonly=True)
+    amountConsumedInMad = fields.Float(string='budget consommé en Dh', readonly=True)
+    amountConsumedInEuros = fields.Float(string='budget consommé en Euros')
+    Frais = fields.Float(string='Frais à résuire en Dh', required=True)
+    EurosToMad = fields.Float(string='1 Euro en Dhs', required=True)
+    name_seq = fields.Char(string='Référence de campagne', required=True, copy=False, readonly=True, index=True, default=lambda self: _('New'))
+>>>>>>> 22a8b6fff1050f5ff11791934ffeb468293f6436
 
 
 
@@ -228,10 +243,27 @@ class campagne(models.Model):
 
     @api.model
     def create(self, vals):
+<<<<<<< HEAD
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('budget_management.campagne.sequence') or _('New')
 
         vals['initialAmountInMad'] = float(vals['initialAmountInMad']) - float(vals['Frais'])
+=======
+        _logger.debug("this is vals:------------------------- %s", vals)
+        print(vals)
+        if vals.get('name_seq', _('New')) == _('New'):
+            vals['name_seq'] = self.env['ir.sequence'].next_by_code('budget_management.campagne.sequence') or _('New')
+        
+        #vals['initialAmountInMad'] = float(vals['initialAmountInMad']) - float(vals['Frais'])
+        #vals['initialAmountInEuros'] = float(vals['initialAmountInMad']) / float(vals['EurosToMad'])
+        
+        #if float(vals['amountConsumedInMad']) > float(vals['initialAmountInMad']):
+            #raise ValidationError("Le budget consommé ne peut pas être supérieur au budget initial")
+        #else:
+            #vals['amountConsumedInEuros'] = float(vals['amountConsumedInMad']) / float(vals['EurosToMad'])
+            #vals['amountLeftInMad'] = float(vals['initialAmountInMad']) - float(vals['amountConsumedInMad'])
+            #vals['amountLeftInEuros'] = float(vals['initialAmountInEuros']) - float(vals['amountConsumedInEuros'])
+>>>>>>> 22a8b6fff1050f5ff11791934ffeb468293f6436
 
         result = super(campagne, self).create(vals)
         return result
