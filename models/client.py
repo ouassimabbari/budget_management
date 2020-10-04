@@ -8,7 +8,6 @@ class contact(models.Model):
 
      campagnes = fields.One2many('budget_management.campagne','client','Campagnes')
      campagne_count = fields.Integer(compute='compute_campagnes_count')
-<<<<<<< HEAD
      #budget = fields.Many2one('budget_management.client_budget', 'budget')
      #client_budget_selected = fields.Boolean(default=False)
 
@@ -35,8 +34,6 @@ class contact(models.Model):
     #         self.client_budget_selected = True
     #     else:
     #         self.client_budget_selected = False
-=======
->>>>>>> 22a8b6fff1050f5ff11791934ffeb468293f6436
 
      def get_campagnes(self):
         self.ensure_one()
